@@ -41,7 +41,7 @@ pipeline {
                     withSonarQubeEnv('sonar-server') { // analysing and uploading to server
                         sh "${scannerHome}/bin/sonar-scanner"
                     }
-            }
+            }  }
         }
         stage('Build Image') {
             steps {
