@@ -26,7 +26,20 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-                sh "npm install"
+                script{
+                    sh """
+                         npm install
+                    """     
+                }  
+            }
+        }
+
+        stage('SonarQube Analysis'){
+            tools{
+                sonar 'sonar-8'
+            }
+            steps {
+                script 
             }
         }
         stage('Build Image') {
