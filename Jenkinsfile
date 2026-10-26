@@ -39,7 +39,9 @@ pipeline {
                 sonar 'sonar-8'
             }
             steps {
-                script 
+                script {
+                    sh "sonar-scanner"
+                }
             }
         }
         stage('Build Image') {
