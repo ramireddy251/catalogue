@@ -35,13 +35,12 @@ pipeline {
         }
 
         stage('SonarQube Analysis'){
-            tools{
-                sonar 'sonar-8'
-            }
             steps {
                 script {
-                    sh "sonar-scanner"
-                }
+                    def scannerHome = tool name: 'sonar-8' // agent configuration
+                    withSonarQubeEnv('sonar-server') { // analysing and uploading to server
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
             }
         }
         stage('Build Image') {
