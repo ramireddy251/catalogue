@@ -42,12 +42,9 @@ pipeline {
                 aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REGISTRY}
                 
                 # 2. Tag the local image with the ECR repository URL
-                docker tag ${ECR_REPO_NAME}:${appVersion} ${ECR_REGISTRY}/${ECR_REPO_NAME}:${appVersion}
-                docker tag ${ECR_REPO_NAME}:${appVersion} ${ECR_REGISTRY}/${ECR_REPO_NAME}:latest
-                
+                docker tag ${ECR_REPO_NAME}:${appVersion} ${ECR_REGISTRY}/${ECR_REPO_NAME}:${appVersion}                
                 # 3. Push both the versioned tag and 'latest' tag to ECR
                 docker push ${ECR_REGISTRY}/${ECR_REPO_NAME}:${appVersion}
-                docker push ${ECR_REGISTRY}/${ECR_REPO_NAME}:latest
                 """
             }
         }
